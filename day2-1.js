@@ -1,3 +1,11 @@
+const test = ['abcdef',
+'bababc',
+'abbcde',
+'abcccd',
+'aabcdd',
+'abcdee',
+'ababab'];
+
 const input = ['fonbsmjyqugrapsczckghtvdxl',
 'fonpsmjyquwrnpeczikghtvdxw',
 'fonbsmdymuwrapexzikghtvdxl',
@@ -249,3 +257,35 @@ const input = ['fonbsmjyqugrapsczckghtvdxl',
 'fonbsmjyquwrapeezivghtvdql',
 'fonbdmjyqujsapeczikghtvdxl'];
 
+function checkForN(input, n) {
+    var chars = {};
+    input.split('').forEach(letter => {
+        if (!chars[letter]) {
+            chars[letter] = 0;
+        }
+        chars[letter]++;
+    });
+    var match = false;
+    Object.keys(chars).forEach(key => {
+        if (chars[key] === n) {
+            match = true;
+        }
+    });
+    return match;
+}
+
+var two = input.reduce((a, v) => {
+    if (checkForN(v, 2)) {
+        return a + 1;
+    }
+    return a;
+}, 0);
+
+var three = input.reduce((a, v) => {
+    if (checkForN(v, 3)) {
+        return a + 1;
+    }
+    return a;
+}, 0);
+
+console.log(two, three, two * three);
